@@ -1,0 +1,17 @@
+{
+  "Hero": {
+    "required": ["headline", "subheadline", "cta_text"],
+    "optional": ["background_video", "hero_image"],
+    "variants": ["full-screen", "split-screen", "carousel"]
+  },
+  "ProductCard": {
+    "required": ["image", "title", "price"],
+    "optional": ["badges", "rating", "add_to_cart_btn"],
+    "variants": ["grid-item", "list-item", "minimal"]
+  },
+  "MenuViewer": {
+    "required": ["categories", "items"],
+    "optional": ["3d_mode_enabled", "filter_tags"],
+    "variants": ["list", "grid", "carousel", "book-view"]
+  }
+}

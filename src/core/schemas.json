@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Universal Polymorphic Entity",
+  "description": "A schema-agnostic product engine for both Hospitality and Retail contexts.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique UUID for the entity"
+    },
+    "context_token": {
+      "type": "string",
+      "enum": ["hospitality", "retail", "hybrid"],
+      "description": "Defines which trait groups are active"
+    },
+    "base_traits": {
+      "type": "object",
+      "properties": {
+        "canonical_name": { "type": "string" },
+        "base_price": { "type": "number" },
+        "description": { "type": "string" },
+        "assets": {
+          "type": "object",
+          "properties": {
+            "hero_visual": { "type": "string" },
+            "product_hero": { "type": "string" },
+            "seasonal": { "type": "array", "items": { "type": "string" } },
+            "cart_thumbnail": { "type": "string" }
+          },
+          "required": ["product_hero", "cart_thumbnail"]
+        }
+      },
+      "required": ["canonical_name", "base_price", "assets"]
+    },
+    "hospitality_traits": {
+      "type": "object",
+      "properties": {
+        "mod_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "options": { "type": "array", "items": { "type": "string" } },
+              "max_selection": { "type": "number" }
+            }
+          }
+        },
+        "cook_time": { "type": "number", "description": "Average preparation time in minutes" },
+        "prep_station_id": { "type": "string" },
+        "cooking_temp_required": { "type": "boolean" },
+        "pairing_suggestions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "retail_traits": {
+      "type": "object",
+      "properties": {
+        "sku": { "type": "string" },
+        "weight_unit": { "type": "string", "enum": ["kg", "lb", "oz", "g"] },
+        "aisle_coordinate": { "type": "string" },
+        "inventory_buffer": { "type": "number" },
+        "ebt_eligible": { "type": "boolean" }
+      }
+    },
+    "visual_traits": {
+      "type": "object",
+      "description": "The Stitch Bridge for R3F",
+      "properties": {
+        "r3f_model_path": { "type": "string" },
+        "primary_hex": { "type": "string" },
+        "font_token": { "type": "string" },
+        "vibe_vector": { "type": "array", "items": { "type": "number" } }
+      }
+    }
+  },
+  "required": ["id", "context_token", "base_traits"]
+}
